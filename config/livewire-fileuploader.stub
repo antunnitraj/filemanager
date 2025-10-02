@@ -10,7 +10,7 @@ return [
     */
     'acl_enabled' => false,
     'tenant_enabled' => false,
-    'tenant_model' => '\App\Models\Tenant::class',
+    'tenant_model' => \App\Models\Tenant::class,
     'tenant_column_id' => 'tenant_id',
 
     /*
