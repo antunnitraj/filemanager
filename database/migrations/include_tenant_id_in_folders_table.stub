@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-       if (config('livewire-fileuploader.acl_enabled')) {
-           Schema::table('folders', function (Blueprint $table) {
-               if (!Schema::hasColumn('folders', config('livewire-fileuploader.tenant_id_column', 'tenant_id'))) {
-                   $table->foreignIdFor(config('livewire-fileuploader.tenant_model', '\App\Models\Tenant::class'), config('livewire-fileuploader.tenant_id_column', 'tenant_id'))
-                       ->after('user_id')
-                       ->nullable()
-                       ->nullOnDelete();
-               }
-           });
-       }
+        Schema::table('folders', function (Blueprint $table) {
+            if (!Schema::hasColumn('folders', 'tenant_id')) {
+                $table->foreignIdFor(config('livewire-fileuploader.tenant_model'), 'tenant_id')
+                    ->nullable()
+                    ->nullOnDelete();
+            }
+        });
     }
 
     /**
@@ -28,11 +25,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (config('livewire-fileuploader.acl_enabled')) {
-            Schema::table('folders', function (Blueprint $table) {
-                $table->dropForeign([config('livewire-fileuploader.tenant_id_column', 'tenant_id')]);
-                $table->dropColumn(config('livewire-fileuploader.tenant_id_column', 'tenant_id'));
-            });
-        }
+        Schema::table('folders', function (Blueprint $table) {
+            $table->dropForeign(['tenant_id']);
+            $table->dropColumn('tenant_id');
+        });
     }
 };
