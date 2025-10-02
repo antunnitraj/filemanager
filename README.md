@@ -24,7 +24,9 @@ Watch the presentation of the package here: [Laravel Switzerland Meetup](https:/
 ## Additions in this fork
 First, use the Livewire-compenent directly in your blade file, instead of using the x-livewire-filemanager tag. This way you can pass parameters to the component.
 
+```blade
 <livewire:livewire-filemanager tenant_id="{{session('tenant')}}" />
+```
 
 Second, I added the option for a tenant-id/team-id the folders-table. So the filemanager can be used in a multi-tenant application. The tenant_id is stored in the session, so it is available in the blade file.
 
@@ -32,7 +34,9 @@ I did this not by a global config, but by the option to add the tenant_id as a p
 
 In addition, also the user_id can be added directly to the livewire-component. This way, the filemanager can be used in a multi-user application.
 
+```blade
 <livewire:livewire-filemanager tenant_id="{{session('tenant')}}" user_id="{{Auth::id()}}" />
+```
 
 In addition, I solved some bugs related to using the filemanager with ACL or multi-tenant.
 
